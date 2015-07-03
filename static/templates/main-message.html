@@ -1,0 +1,55 @@
+<div ng-if="isOldiOS != true">
+  <div ng-if="!state.loggedIn" class="container-main-message">
+    <div class="panel">
+      <div class="panel-body">
+  	   <h2 style="text-align:left;padding:10px 0px;margin:0px">Real people having real conversations.</h2>
+
+      <div ng-show="!isMobile" style="padding:10px 0px;background-color:#f8fafb;border:solid 1px grey">
+        <div db-slides></div>
+      </div>
+
+    <div class="row">
+      <div class="col-md-4" style="padding:20px;padding-bottom:0px">
+        <h3 style="float:left">Privacy.</h3>
+        <div class="clearfix"></div>
+        <p style="font-size:14pt;">No ads, ever.</p> 
+      </div>
+      <div class="col-md-4" style="padding:20px;padding-bottom:0px">
+        <h3 style="float:left">Quality.</h3>
+        <div class="clearfix"></div>
+        <p style="font-size:14pt;">We kick out trolls.</p>
+      </div>
+      <div class="col-md-4" style="padding:20px;padding-bottom:0px">
+        <h3 style="float:left">Community.</h3>
+        <div class="clearfix"></div>
+        <p style="font-size:14pt;">Members are great.</p>
+      </div>
+    </div>
+
+  
+  	<div class="row" style="text-align:center;padding-top:15px;">
+      <a ui-turn-on="uiSidebarLeft"><button type="button" ng-if="isMobile" class="btn btn-xl btn-primary" ng-click="">Check it out</button></a>
+  		<a href="/sign-up"><button type="button" ng-if="!isMobile" class="btn btn-xl btn-primary">Get my membership</button></a>
+  	</div>
+  </div>
+  <div ng-if="!state.loggedIn" style="margin:10px; float: right; vertical-align: bottom;">
+</div>
+</div>
+
+</div>
+
+
+	<div db-loading ng-show="!state.loaded"></div>
+
+	<div ng-show="state.loaded && state.loggedIn">
+			<div db-home state="state"></div>
+	</div>
+</div>
+
+<div ng-if="isOldiOS">
+  <div class="panel">
+    <div class="panel-body">
+  	<h2 style="text-align:left">Welcome.</h2>
+  </div>
+</div>
+</div>

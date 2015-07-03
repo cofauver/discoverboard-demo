@@ -1,0 +1,67 @@
+<div id="carousel" class="carousel slide" data-ride="carousel">
+          
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li style="background-color:black;" data-target="#carousel" data-slide-to="0" class="active"></li>
+    <li style="background-color:black;" data-target="#carousel" data-slide-to="1"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+
+    <div class="item active">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <header class="account-header-display-display" style="float:left; padding: 0px 15px; margin: 0px; width:200px;">
+                <span class="account-avatar-display">
+                  <img class="account-image" ng-src="{{slidePicture.anne}}"/>
+                </span>
+                <div>
+                  <h1 class="account-name pointer" ng-click="togglePersonalInfoEdit()">Anne</h1>
+                  <p class="profile-main"><strong>San Francisco, CA</strong></p>
+                  <p class="profile-main">Grad student, bicyclist, explorer</p>
+                </div>
+              </header>
+            </td>
+            <td style="padding-right:15px;">
+              <p style="font-size:12pt;text-align:left;">From <a href="/posts/54ff21e97c8141000df6c586" target="_blank"><em>Our Computers, Ourselves</em></a>:</p>
+              <p style="font-size:14pt;text-align:left;">"This reminds me of <a href="http://www.ted.com/talks/susan_blackmore_on_memes_and_temes?language=en" target="_blank">the Susan Blackmore TED talk about memetics.</a> She talks about genetic replication as the "first replicator" and human thought/behavior communication (language/imitation) as the "second replicator." Any information that is copied with variation and selection can grow and evolve."</p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <div class="clearfix"></div>
+    </div>
+
+    <div class="item">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <header class="account-header-display" style="float:left; padding: 0px 15px; margin: 0px; width:200px">
+                <span class="account-avatar-display">
+                  <img class="account-image" ng-src="{{slidePicture.tina}}"/>
+                </span>
+                <div>
+                  <h1 class="account-name pointer" ng-click="togglePersonalInfoEdit()">Tina</h1>
+                  <p class="profile-main"><strong>Atlanta, Georgia</strong></p>
+                  <p class="profile-main">Chemistry teacher. Mother.</p>
+                </div>
+              </header>
+            </td>
+            <td style="padding:15px;padding-left:0px">
+              <p style="font-size:12pt;text-align:left;">From <a href="/posts/54dd149541df1b000f86d039" target="_blank"><em>Stigma against mental illness</em></a>:</p>
+              <p style="font-size:14pt;text-align:left;">"I really appreciate your perspective, but I'm not sure I agree with "the gendered way mental illness is covered". While <a href ="http://en.wikipedia.org/wiki/Mental_disorders_and_gender">major depression disorder hits women</a> at twice the rate of men, <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1943-278X.1998.tb00622.x/abstract?deniedAccessCustomisedMessage=&userIsAuthenticated=false">men commit suicide at a much higher rate than women.</a> I think a big part of it is that it's more socially acceptable for women to express their emotions to friends and family."</p>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <div class="clearfix"></div>
+    </div>
+
+  </div><!-- End carousel-inner -->
+  <br>
+
+</div> <!-- End carousel -->

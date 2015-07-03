@@ -1,0 +1,90 @@
+<h3 ng-if="!checklistComplete" style="text-align:left;color:white">Complete your account</h3>
+<h3 ng-if="checklistComplete" style="text-align:left;color:white">Woohoo! You're a pro.</h3>
+
+
+<div class="panel panel-default" ng-class="{'well-success': checklistComplete}">
+  <div style="padding:15px">
+
+  	<div class="progress" style="width:95%">
+		<div class="progress-bar" ng-class="{'progress-bar-success': checklistComplete}" role="progressbar" aria-valuenow="{{completeVal}}" aria-valuemin="0" aria-valuemax="100" style="width: {{completeVal}}%;">
+			<span>{{completeVal}}%</span>
+		</div>
+	</div>
+	<div class="row" style="text-align:left;">
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <!-- Create -->
+	  	<p class="todo">
+	  		<span class="glyphicon glyphicon-check"></span>
+	  		&nbsp;
+	  		<span class="checked">Create account</span>
+	  	</p>
+
+      <!-- Community -->
+      <p class="todo" ng-if="!checkedOff.community">
+        <span class="glyphicon glyphicon-edit"></span>
+        &nbsp;
+        <a ng-href="/about">Read our community standards</a>
+      </p>
+      <p class="todo" ng-if="checkedOff.community">
+        <span class="glyphicon glyphicon-check"></span>
+        &nbsp;
+        <span class="checked">Read our community standards</span>
+      </p>
+
+      <!-- Profile -->
+      <p class="todo" ng-if="!checkedOff.profile">
+        <span class="glyphicon glyphicon-edit"></span>
+        &nbsp;
+        <a ng-click="state.personalInfoEdit = true">Complete your profile</a>
+      </p>
+      <p class="todo" ng-if="checkedOff.profile">
+        <span class="glyphicon glyphicon-check"></span>
+        &nbsp;
+        <span class="checked">Complete your profile</span>
+      </p>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+	  	<!-- Comment -->
+  		<p class="todo" ng-if="!checkedOff.reply">
+  			<span class="glyphicon glyphicon-edit"></span>
+  			&nbsp;
+  			<a ng-href="/posts/{{state.topFeaturedPostId}}" ng-click="setSidebarTab(1)">Make a comment</a>
+  		</p>
+  		<p class="todo" ng-if="checkedOff.reply">
+  			<span class="glyphicon glyphicon-check"></span>
+  			&nbsp;
+  			<span class="checked">Make a comment</span>
+  		</p>
+
+  		<!-- Post -->
+  		<p class="todo" ng-if="!checkedOff.post">
+  			<span class="glyphicon glyphicon-edit"></span>
+  			&nbsp;
+  			<a ng-click="state.postAlert = true">Create a post</a>
+  		</p>
+  		<p class="todo" ng-if="checkedOff.post">
+  			<span class="glyphicon glyphicon-check"></span>
+  			&nbsp;
+  			<span class="checked">Create a post</span>
+  		</p>
+
+  		<!-- Invite -->
+  		<p class="todo" ng-if="!checkedOff.invite">
+  			<span class="glyphicon glyphicon-edit"></span>
+  			&nbsp;
+  			<a href="/account/tab/invites" ng-click="setAccountTab(4)">Invite a friend</a>
+  		</p>
+  		<p class="todo" ng-if="checkedOff.invite">
+  			<span class="glyphicon glyphicon-check"></span>
+  			&nbsp;
+  			<span class="checked">Invite a friend</span>
+  		</p>
+    </div>
+
+	</div>
+
+  <a ng-href="/posts/{{state.topFeaturedPostId}}" class="btn btn-primary btn-lg btn-block" ng-if="checklistComplete" ng-click="routeToContent()">Now go forth and explore!</a>
+</div>
+</div>

@@ -1,0 +1,104 @@
+<a ng-attr-href="{{notification.postId ? '/posts/' + notification.postId : undefined}}" style="color:black;" ng-class="{defaultcursor: !notification.postId}">
+<!--  	<li style="margin:0px 10px" ng-if="notification.summary[0]">
+  		<h5 style="word-wrap:break-word;text-align:left">{{notification.summary[0]}}:</h5>
+    </li> -->
+    <li class="divider" style="height:0px"></li>
+
+
+<li ng-if="notification.replies[0]">
+
+	 		<span class="account-avatar-comment pointer" style="float:left;margin:0px 10px">
+				<img ng-if="notification.repliesPicture" class="account-image-comment" ng-src="{{notification.repliesPicture}}"/>
+				<img ng-if="!notification.repliesPicture" class="account-image-comment" src="static/images/default-user.png"/>
+			</span>
+
+			<p style="padding:0;font-size:10pt;width:60%;word-wrap:break-word;float:left;cursor:pointer">
+				{{repliesList}} replied to your post
+			</p>
+		
+
+	<div>
+		<div class="clearfix"></div>
+		<div style="margin-top:10px"></div>
+		<div class="clearfix"></div>
+	</div>
+</li>
+
+
+<li ng-if="notification.hearts[0]">
+
+	 		<span class="account-avatar-comment pointer" style="float:left;margin:0px 10px">
+				<img ng-if="notification.heartsPicture" class="account-image-comment" ng-src="{{notification.heartsPicture}}"/>
+				<img ng-if="!notification.heartsPicture" class="account-image-comment" src="static/images/default-user.png"/>
+			</span>
+
+			<p style="padding:0;font-size:10pt;width:60%;word-wrap:break-word;float:left;cursor:pointer">
+				{{heartsList}} &hearts;ed your post
+			</p>
+
+
+	<div>
+		<div class="clearfix"></div>
+		<div style="margin-top:10px"></div>
+		<div class="clearfix"></div>
+	</div>
+</li>
+
+
+<li ng-if="notification.responses[0]">
+
+		<span class="account-avatar-comment pointer" style="float:left;margin:0px 10px">
+			<img ng-if="notification.responsesPicture" class="account-image-comment" ng-src="{{notification.responsesPicture}}"/>
+			<img ng-if="!notification.responsesPicture" class="account-image-comment" src="static/images/default-user.png"/>
+		</span>
+
+		<p style="padding:0;font-size:10pt;width:60%;word-wrap:break-word;float:left;cursor:pointer">
+			{{responsesList}} also commented
+		</p>
+	
+	<div>
+		<div class="clearfix"></div>
+		<div style="margin-top:10px"></div>
+		<div class="clearfix"></div>
+	</div>
+</li>
+
+
+<li ng-if="notification.follows[0]">
+
+		<span class="account-avatar-comment pointer" style="float:left;margin:0px 10px">
+			<img ng-if="notification.followsPicture" class="account-image-comment" ng-src="{{notification.followsPicture}}"/>
+			<img ng-if="!notification.followsPicture" class="account-image-comment" src="static/images/default-user.png"/>
+		</span>
+
+		<p style="padding:0;font-size:10pt;width:60%;word-wrap:break-word;float:left;cursor:pointer">
+			{{followsList}} (who you follow) commented on this post
+		</p>
+	
+	<div>
+		<div class="clearfix"></div>
+		<div style="margin-top:10px"></div>
+		<div class="clearfix"></div>
+	</div>
+</li>
+
+
+<li ng-if="notification.extras[0]" ng-repeat="extra in notification.extras track by $index">
+	<!-- <div style="height:20px;position:relative;padding:3px 10px 3px 0px"> -->
+
+			<p style="padding:0px 0px 0px 10px;font-size:10pt;word-wrap:break-word;float:left">
+				{{extra}}
+			</p>
+		
+
+	<!-- </div> -->
+	<div>
+		<div class="clearfix"></div>
+		<div style="margin-top:10px"></div>
+		<div class="clearfix"></div>
+	</div>
+</li>
+
+
+</a>
+<li class="divider" style="height:2px"></li>

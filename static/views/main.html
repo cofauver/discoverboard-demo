@@ -1,0 +1,155 @@
+<!-- App body -->
+<div class="app">
+<!-- <div class="navbar navbar-app navbar-absolute-top">
+
+  <div class="btn-group pull-left">
+    <div class="btn btn-navbar">
+      Left Action
+    </div>
+  </div>
+
+  <div class="btn-group pull-right">
+    <div class="btn btn-navbar">
+      Right Action
+    </div>
+  </div>
+</div> -->
+
+
+
+
+    <div class="navbar navbar-app navbar-absolute-top" ng-if="isMobile && isOldiOS != true">
+      
+      <div class="btn-group pull-left">
+        <div class="btn btn-navbar" style="font-size:18pt">
+          <a ui-turn-on="uiSidebarLeft"><span class="glyphicon glyphicon-list"></span></a>
+        </div>
+      </div>
+      
+    </div>
+
+  	<div class="app-body">
+    	<div class="app-content">
+
+          <div ng-if="isOldiOS && state.main" db-main-message state="state"></div>
+          <div ng-if="isOldiOS != true" class="scrollable">
+        		<div class="scrollable-content" in-view-container>
+
+              <!-- Necessary to make the user dropup work -->
+              <div class="btn-group dropup" ng-hide="true">
+                <button 
+                  type="button" 
+                  class="btn btn-default dropdown-toggle" 
+                  ui-turn-on="userDropdown">
+                </button>
+                <ul 
+                  class="dropdown-menu"
+                  ui-outer-click="Ui.turnOff('userDropdown')"
+                  ui-outer-click-if="Ui.active('userDropdown')"
+                  role="menu"
+                  ui-show="userDropdown" 
+                  ui-state="userDropdown"
+                  ui-turn-off="userDropdown">
+                </ul>
+              </div>
+              <!-- End dropup  necessary but invisible code-->
+
+              <!-- Necessary to make the notifications dropup work -->
+              <div class="btn-group dropup" ng-hide="true">
+                <button 
+                  type="button" 
+                  class="btn btn-default dropdown-toggle" 
+                  ui-turn-on="notificationsDropup">
+                </button>
+                <ul 
+                  class="dropdown-menu"
+                  ui-outer-click="Ui.turnOff('notificationsDropup')"
+                  ui-outer-click-if="Ui.active('notificationsDropup')"
+                  role="menu"
+                  ui-show="notificationsDropup" 
+                  ui-state="notificationsDropup"
+                  ui-turn-off="notificationsDropup">
+                </ul>
+              </div>
+              <!-- End dropup  necessary but invisible code-->
+
+              <!-- Flag dropdown -->
+              <div class="btn-group dropup" ng-hide="true">
+                <button 
+                  type="button" 
+                  class="btn btn-default dropdown-toggle" 
+                  ui-turn-on="flagDropdown">
+                </button>
+                <ul 
+                  class="dropdown-menu"
+                  ui-outer-click="Ui.turnOff('flagDropdown'); state.specificId ='';"
+                  ui-outer-click-if="Ui.active('flagDropdown')"
+                  role="menu"
+                  ui-show="flagDropdown" 
+                  ui-state="flagDropdown"
+                  ui-turn-off="flagDropdown">
+                </ul>
+              </div>
+              <!-- end flagging dropdown -->
+
+              <!-- suggestion dropdown -->
+              <div class="btn-group dropup" ng-hide="true">
+                <button 
+                  type="button" 
+                  class="btn btn-default dropdown-toggle" 
+                  ui-turn-on="suggestDropdown">
+                </button>
+                <ul 
+                  class="dropdown-menu"
+                  ui-outer-click="Ui.turnOff('suggestDropdown'); state.specificId ='';"
+                  ui-outer-click-if="Ui.active('suggestDropdown')"
+                  role="menu"
+                  ui-show="suggestDropdown" 
+                  ui-state="suggestDropdown"
+                  ui-turn-off="suggestDropdown">
+                </ul>
+              </div>
+              <!-- end suggestion dropdown -->
+
+              <a href="/account/tab/payment" style="text-decoration:none;">
+                <div class="alert alert-danger expired-alert" role="alert" ng-if="state.expired" >
+                  <span class="glyphicon glyphicon-exclamation-sign"></span>
+                  Your free trial has expired. Click on this message to add payment info
+                  and renew full access.
+                </div>
+              </a>
+
+
+              <div db-loading ng-hide="comment || state.main || state.signIn || state.signUp || state.about || state.writePost || state.accountPage || state.contact || state.tos || state.privacy || state.faq || state.forgotPassword || state.externalPasswordReset || state.publicProfile || state.verifyUser || state.anonymousPosting || state.twoWeekAnonymous"></div>
+              
+              <div style="margin-top:20px"></div>
+              
+	            <div db-board state="state" comment="comment" depth="0"  ng-if="comment && comment.children"></div>
+
+              <div class="container-message" ng-if="state.signIn">
+                <div db-login  state="state"></div>
+              </div>
+
+              <div db-main-message state="state" ng-if="state.main"></div>
+              <div db-create-account ng-if="state.signUp" state="state"></div>
+              <div db-contact state="state" ng-if="state.contact"></div>
+              <div db-forgot-password state="state" ng-if="state.forgotPassword"></div>
+              <div db-external-password-reset state="state" ng-if="state.externalPasswordReset"></div>
+              <div db-tos state="state" ng-if="state.tos"></div>
+              <div db-privacy state="state" ng-if="state.privacy"></div>
+              <div db-faq state="state" ng-if="state.faq"></div>
+              <div db-about ng-if="state.about"></div>
+			        <div db-write-post state="state" ng-if="state.writePost"></div>
+			        <div db-account state="state" ng-if="state.accountPage"></div>
+              <div db-public-profile ng-if="state.publicProfile"></div> 
+              <div db-anonymous-profile ng-if="state.anonymousPosting"></div>             
+              <div db-two-week-anonymous ng-if="state.twoWeekAnonymous"></div>             
+              <div db-verify-user ng-if="state.verifyUser"></div>              
+
+        		</div>
+      		</div>
+    	</div>
+  	</div>
+</div>
+<!-- Modals and Overlays -->
+<div ui-yield-to="modals"></div>

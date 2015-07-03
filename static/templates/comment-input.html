@@ -1,0 +1,22 @@
+<!-- <form ng-if="inputText || depth === 0" ng-show="username" role="form" ng-submit="submitComment(inputText.markup)"> -->
+<form role="form" ng-submit="submitComment(inputText.markup)">
+	<div class="comment-box">
+		<div class="comment-input">
+			<div class="checkbox btn btn-default" style="float:right;cursor:pointer;margin-top:0px" ng-click="userInput.anonymous=!userInput.anonymous">
+				<span ng-hide="userInput.anonymous">Anonymize this post</span>
+				<span ng-show="userInput.anonymous" style="color:green">
+					<span class="glyphicon glyphicon-ok"></span>
+					<span>Anonymized</span>
+				</span>
+			</div>
+			<div class="text-angular" text-angular ta-toolbar="[['quote'],['italics'],['insertLink'],['insertImage']]" ng-model="inputText.markup" placeholder="What are your thoughts?"></div>
+			<div class="clear"></div>
+			<button ng-disabled="!inputText.markup" ng-show="!submitted" type="submit" class="btn btn-primary comment-form">Reply</button>
+			<button ng-disabled="true" ng-show="submitted" type="submit" class="btn btn-primary comment-form">Success!</button>
+			<div class="clear"></div>
+		</div>
+	</div>
+</form>
+<div class="clear"></div>
+
+<hr ng-show="!username">

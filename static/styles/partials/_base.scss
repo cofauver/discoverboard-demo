@@ -1,0 +1,16 @@
+
+// imports for all mixins 
+
+@import "compass";
+@import "modules/all";
+
+// global project variables
+
+
+// Base Fonts
+$header-font-family: "Montserrat", sans-serif;
+$paragraph-font-family: "Roboto", sans-serif;
+$paragraph-font-size: 14pt;
+
+// Background texture.
+$site-background: url('../images/cream_dust.png') repeat 0 0;

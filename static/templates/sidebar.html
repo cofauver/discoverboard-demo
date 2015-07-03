@@ -1,0 +1,54 @@
+<div class="sidebar sidebar-left">
+  <div class="scrollable">
+    <div class="scrollable-header">
+
+      <h1 style="margin:0;padding:0;">
+        <a href="/" style="color:#f8fafb" ui-turn-off="uiSidebarLeft">
+            Demo
+        </a>
+
+        <a ui-class="{'active': postTab === 1}" ng-click="setTab(1)" class="btn btn-default btn-sm">Featured</a>
+        <a ui-class="{'active': postTab === 2}" ng-click="setTab(2)" class="btn btn-default btn-sm">Latest</a>
+        <!-- <a ng-show="windowWidth.lg" ng-click="showSearchbar = !showSearchbar" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-search"></i></a> -->
+
+      </h1>
+      
+
+      
+      <div ng-show="loggedIn && !expired" class="right-inner-addon">
+        <i ng-show="searchText" class="glyphicon glyphicon-search pointer" ng-click="search(searchText)" title="Search all posts"></i>
+        <i ng-show="searchText" class="glyphicon glyphicon-remove-circle pointer" ng-click="clearSearch()" title="Clear search"></i>
+        <input type="search" ng-model="searchText" class="form-control search-box" placeholder="Search" ng-keydown="$event.which === 13 && search(searchText)"/>
+      </div>
+
+    </div>
+
+    <div class="scrollable-content" ui-show="postTab === 1">
+      <div ng-show="loggedIn && !searchText && !expired" db-sidebar-list list="featuredPosts" searching="searching"></div>
+      <div ng-show="loggedIn && searchText && !expired" db-sidebar-list list="searchResult" searching="searching"></div>
+      <div ng-if="!loggedIn || expired" db-sidebar-list list="samplePosts"></div>
+    </div>
+
+    <div class="scrollable-content" ui-show="postTab === 2" in-view-container>
+      <div ng-show="loggedIn && !searchText && !expired" db-sidebar-list list="latestPosts" list-name="'latest'" searching="searching"></div>
+      <div ng-show="loggedIn && searchText && !expired" db-sidebar-list list="searchResult" searching="searching"></div>
+      <div ng-if="!loggedIn" db-login style="margin:20px 10px 10px 10px;"></div>
+      <h4 ng-if="expired" style="margin:20px 10px 10px 10px;"><a href="/account/tab/payment">Add payment info</a> to regain full access</h4>
+    </div>
+
+    <div class="scrollable-footer">
+      <h1 style="margin-bottom:5px;" ng-if="loggedIn">
+        <span db-notification-badge></span>
+        <span db-user-button logged-in="loggedIn"></span>
+      </h1>
+    <!-- End logged in content -->
+
+      <h1 ng-if="!loggedIn">
+        <a href="/sign-up"><button type="button" class="btn btn-default" title="Join the community">Join the community</button></a>
+        <a href="/sign-in"><button type="button" class="btn btn-default">Sign in</button></a>
+      </h1>
+
+    </div>
+
+  </div>
+</div>

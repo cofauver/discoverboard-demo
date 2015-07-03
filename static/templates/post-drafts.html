@@ -1,0 +1,24 @@
+<div class="drafts-top-container">
+	<div ng-show="drafts.length === 0">
+		<h3 style="text-align:left" >No saved drafts...</h3>
+		<p style="font-size: 11pt;">Click the "Save draft" button to save what you're writing.</p>
+	</div>
+	
+
+	<h3 style="text-align:left" ng-show="drafts.length > 0">Saved drafts</h3>
+	<div ng-repeat="draft in drafts">
+		<div class="panel panel-default" style="margin-top: 15px">
+			<div class="panel-body" style="cursor:pointer" ng-click="draft.open=!draft.open">
+				<p style="padding:0px" ng-hide="draft.open" ><em>{{draft.summary}}</em></p>
+				<p style="padding:0px" ng-show="draft.open" ng-bind-html="draft.html"></p>
+			</div>
+
+			<div class="panel-footer" ng-show="draft.open">
+				<button class="btn btn-default" ng-click="loadDraft(draft)">Edit draft</button>
+				<button class="btn btn-default" ng-click="deleteDraft(draft)">
+					<span class="glyphicon glyphicon-trash"></span> Delete draft
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

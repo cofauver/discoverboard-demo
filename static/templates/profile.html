@@ -1,0 +1,34 @@
+<div class="container-message">
+	<div class="panel">
+		<div class="panel-body">
+
+<div class="account-header" style="margin: 30px 15px 30px 15px;">
+	<span class="account-avatar">
+		<img ng-if="profileData.picture" class="account-image" ng-src="{{profileData.picture}}"/>
+		<img ng-if="!profileData.picture" class="account-image" src="static/images/default-user.png"/>
+	</span>
+	<div ng-show="signedIn">
+		<h1 class="account-name">{{profileData.name}}</h1>
+
+		<p class="profile profile-add" ng-show="profileData.location">{{profileData.location}}</p>
+
+		<p class="profile profile-add" ng-show="profileData.bio">{{profileData.bio}}</p>
+
+		<div ng-show="!isFollowing" class="btn btn-primary" ng-click="follow()">Follow</div>
+		<div ng-show="isFollowing" class="btn btn-success" ng-click="unfollow()">
+			<span class="glyphicon glyphicon-ok"></span>
+			Following
+		</div>
+	</div>
+	<div ng-hide="signedIn">
+
+		<h3>
+			<span class="glyphicon glyphicon-eye-close"></span>
+			Sign in to see user profile
+		</h3>
+	</div>
+</div>
+
+</div>
+</div>
+</div>

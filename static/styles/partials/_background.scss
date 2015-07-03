@@ -1,0 +1,38 @@
+//the defaults for all of the key background components
+@import "base"
+
+body { 
+  background: $site-background
+  padding-bottom: 30px;
+}
+form {
+  text-align: center;
+}
+footer {
+  padding: 0em 0em 2em 0em;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+  font-family: $header-font-family;
+}
+hr {
+  border-color: gray;
+}
+p{
+  padding: 10px 10px 10px 10px;
+  font-family: $paragraph-font-family;
+  font-size: $paragraph-font-size;
+}
+input{
+	&:focus{
+		outline:0px !important;
+		-webkit-appearance:none;
+	}
+	& .form-control.ng-invalid.ng-dirty{
+		border-color: #FA787E;
+  		box-shadow: none!important;	
+	}
+	& .form-control.ng-valid.ng-dirty{
+  border-color: #5CB85C;
+  box-shadow: none!important;
+}

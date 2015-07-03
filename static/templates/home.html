@@ -1,0 +1,69 @@
+<div ng-show="username && newsfeed">
+
+	<div class="comment-container comment-container-top">
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div db-self-profile></div>
+			</div>
+
+			<div class="panel-footer">
+				<div db-write-post state="state"></div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+
+		<div ng-if="!state.checklistComplete" db-profile-completion state="state"></div>
+
+		<h3 style="text-align:left;color:white">Notifications and Post History</h3>
+
+	</div>
+
+    <div>
+	  	<p ng-show="newsfeed.length===0">Sorry, nothing here yet. Try commenting on some posts.</p>
+
+	    <div ng-repeat="card in newsfeed track by $index">
+            <div in-view="reportInView($index, $inview)"></div>
+
+		    <div ng-if="card.activityType === 'post'">
+				<a ng-href="/posts/{{card.id}}" style="color:black">
+					<div db-comment comment="card"></div>
+				</a>
+			</div>
+
+        	<div ng-if="card.activityType == 'notification'" style="list-style-type: none;" class="comment-container comment-container-top">
+        
+                <a ng-attr-href="{{card.postId ? '/posts/' + card.postId : undefined}}" style="color:black;" ng-class="{defaultcursor: !card.postId}">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <h4 style="margin:0px 10px 20px 10px;text-align:left" ng-if="card.summary[0]">
+                                "{{card.summary[0]}}"
+                            </h4>
+
+                            <div db-notification notification="card"></div>
+                        </div>
+                    </div>
+                </a>
+
+        	</div>
+    	</div>
+
+    	<div db-loading ng-if="loadHasBeenTriggered"></div>
+
+        
+    </div>
+
+
+
+
+</div>
+
+<div db-loading ng-if="!newsfeed && username"></div>
+
+	
+<div ng-hide="username" style="margin: 30px 15px 30px 15px;">
+	<h1><span class="glyphicon glyphicon-eye-close"></span>
+	&nbsp;Sign in to view your account</h1>
+</div>
+

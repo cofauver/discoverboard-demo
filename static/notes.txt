@@ -1,0 +1,48 @@
+notes.txt
+
+-Get exitTime in for each post when you leave the page.
+-Refine enterTime and exitTime to report only when you've viewed their part of the dom
+
+-making A TON of /user/UID calls
+-Username not disappearing upon logout and changing to the blank page.
+-when you first make a user the navbar doesn't display the points correctly.
+-navbar points update has null for the userid when it makes the call
+
+-accounts page
+	-logout
+		-a button that clears your local storage
+		-sends you to SOME page with createAccount displayed.
+	-login
+		-an input to put in your username
+		-when you login, it adds to the local storage
+		-create-account.html and createAccount directive
+
+	-switch between multiple users
+
+-Styling buttons for the input box
+	-maybe make the bold button surround a the highlighted text with **'s
+	-maybe italics button surrounds the highlighted text with _'s
+
+-There is no "primary link" on any given post.
+
+Just built color service. It might be better to have something like "StyleService" to 
+hold all of the functions that relate to styling.
+This might also be do-able in SASS
+
+
+
+COMPLETED:
+-The points is having a problem. Error each time the update happens
+
+-Interaction id's are not registering properly. Tip interactions do not have the correct interactions ids
+when I try to report
+
+-Get summaries standardized
+
+-Get Posts appearing on the recommended posts page
+-The usernames aren't showing up on post page
+
+-The input box on the posts page needs to add a post with a summary to the top of the list
+
+
+

@@ -1,0 +1,35 @@
+<div class="clearfix"></div>
+
+<div id="opengraph" style="padding:0px 0px 15px 0px;">
+    <a href="{{site[count].url}}" target="_blank" ng-if="opengraphWidth >= 550">
+        <table style="border:1px solid grey">
+            <tr>
+                <td width="40%" ng-style="{'background-image': 'url({{site[count].image}})'}" style="background-size:cover;"></td>
+                <td width="60%">
+                    <div style="padding:15px">
+                        <h3 style="text-align:left; color:#000000;">{{site[count].title}}</h3>
+                        <p style="color:#000000;font-size:11pt;padding-bottom:0px">{{site[count].description}}</p>
+                        <p style="color:grey;font-size:11pt;float:right;padding-top:10px">{{site[count].site_name}}</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </a>
+
+    <a href="{{site[count].url}}" target="_blank" ng-if="opengraphWidth < 550">
+        <table style="border:1px solid grey">
+            <tr ng-style="{'height': '{{opengraphWidth * .5}}'}">
+                <td ng-style="{'background-image': 'url({{site[count].image}})'}" style="background-size:cover;"></td>
+            </tr>
+           	<tr>
+                <td>
+                    <div style="padding:10px; padding-top:15px">
+                        <h3 style="text-align:left; color:#000000;">{{site[count].title}}</h3>
+                        <p style="color:#000000;font-size:11pt;padding-bottom:0px">{{site[count].description}}</p>
+                        <p style="color:grey;font-size:11pt;float:right;padding-top:10px">{{site[count].site_name}}</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </a>
+</div>

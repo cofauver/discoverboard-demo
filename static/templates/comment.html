@@ -1,0 +1,133 @@
+<a ng-if="missingContext" ng-href="/posts/{{comment.topParentId}}" class="comment-container comment-container-top">
+	<div  class="glyphicon glyphicon-arrow-up"></div>
+	<span>See the context of this post</span>
+</a>
+
+<!-- <div ng-show="comment.posterName && !isMobile" class="suggest-button btn btn-default" ng-if="topLevelPost" style="float:right; margin-right:10px;" ng-click="fbShare()">Share this conversation on Facebook</div> -->
+
+<div class="comment-container comment-container-top" ng-hide="deletedComment">
+	
+	<!-- <div db-suggest-conversation post="comment" ng-if="topLevelPost && comment.posterName" style="padding-bottom:10px"></div> -->
+
+	<div class="panel panel-default">
+
+		<span ng-show="displayPermalink" db-permalink comment="comment"></span>
+
+		<div style="height:62px; position: relative">
+			<span class="account-avatar-comment" style="float:left;">
+				<img ng-if="comment.posterPicture" class="account-image-comment" ng-src="{{comment.posterPicture}}"/>
+				<img ng-if="!comment.posterPicture" class="account-image-comment" src="static/images/default-user.png"/>
+			</span>
+
+			<h1 class="comment-author" ng-hide="comment.inappropriate===1">
+				<span ng-hide="signedIn" class="center-vertical"><a href="/sign-in">Sign in to see names</a></span>
+				<span ng-show="state.expired" class="center-vertical"><a href="/account/tab/payment">Your trial has expired</a></span>
+				<div ng-show="signedIn && !state.expired" style="padding-left:62px;width:100%;" class="center-vertical">
+					<a ng-show="!comment.posterId && comment.anonymous" ng-href="/anonymous-posting">{{comment.posterName}}</a>
+					<a ng-show="!comment.posterId && !comment.anonymous" ng-href="/two-week-anonymous">{{comment.posterName}}</a>
+					<a ng-show="comment.posterId" ng-href="/profile/{{comment.posterId}}">{{comment.posterName}}</a>
+
+					<!-- tip button -->
+					<span ng-show="!owner">
+						<span>&nbsp;</span>
+						<span ng-hide="comment.tip" class="glyphicon glyphicon-heart-empty tip-glyph" title="Let the poster know you thought this was insightful." ng-click="tipComment()"></span>
+						<span ng-show="comment.tip" class="glyphicon glyphicon-heart tip-glyph"></span>
+					</span>
+					<!-- end tip button -->
+
+					<span style="cursor:pointer;float:right;padding-right:20px;">
+
+						<span ng-show="username && !state.expired">
+
+							<span ng-if="depth > 0">
+								<span class="comment-action pointer" ng-hide="depthLimit" ng-click="toggleReply()">Reply</span>
+								<span class="comment-action" ng-hide="mobileLimit">&nbsp;|&nbsp;</span>
+							</span>
+
+							<!-- edit button -->
+							<span ng-if="eligibleToEdit" class="comment-action pointer" ng-click="toggleEdit()">Edit</span>
+							<span ng-if="eligibleToEdit" class="comment-action">&nbsp;|&nbsp;</span>
+							<!-- end edit button -->
+
+							<!-- delete button -->
+							<span ng-if="eligibleToEdit && !readyToDelete" class="comment-action pointer" ng-click="prepareToDelete()">Delete</span>
+							<span ng-if="readyToDelete" class="comment-action red pointer" ng-click="deletePost()">Confirm Delete</span>
+							<span ng-if="eligibleToEdit || readytoDelete" class="comment-action">&nbsp;|&nbsp;</span>
+							<!-- end delete button -->
+							
+							<span ng-show="!owner" class="comment-action" db-flag state="state" comment="comment"></span>
+
+							<!-- Permalink -->
+							<span class="comment-action" ng-show="!owner">&nbsp;|&nbsp;</span>
+							<span class="comment-action pointer" ng-click="displayPermalink = !displayPermalink" class="url-button">URL</span>
+							<!-- Permalink -->
+
+							<!-- comment collapse -->
+							<span ng-if="depth > 0">
+								<span class="comment-action pointer" ng-show="comment.collapse" ng-click="comment.collapse=!comment.collapse">[+]</span>
+								<span class="comment-action pointer" ng-show="!comment.collapse" ng-click="comment.collapse=!comment.collapse">[-]</span>
+							</span>
+							<!-- end comment collapse -->
+
+						</span>
+
+
+					</span>
+
+				</div>
+
+			</h1>
+
+			<h1 ng-if="comment.inappropriate===1" class="comment-author">
+				<span class="center-vertical">
+					&nbsp;<em>This comment has been removed for violating <a href="/about">our community standards.</a></em>
+				</span>
+			</h1>
+
+		</div>
+
+		<div class="clear"></div>
+
+		<div class="panel-body" ng-hide="comment.inappropriate===1 || comment.collapse" in-view="reportInView(comment, $inview)">
+			<!-- comment editor -->
+			<div db-comment-edit comment="comment" editing="editing" ng-show="editing"></div>
+			<!-- End comment editor -->
+			<div ng-hide="editing">
+				<!-- <h4 class="align-left" ng-show="depth===0">{{comment.summary}}</h4> -->
+				<div ng-repeat="paragraph in comment.textToDisplay track by $index">
+					<!-- <div ng-mouseover="excerpt=true" ng-mouseout="excerpt=false"> -->
+					<div ng-if="paragraph.indexOf('<p><div db-opengraph') === -1">
+						<p class="comment-text" ng-bind-html="paragraph"></p>
+						<span ng-click="excerptParagraph(paragraph, comment.posterName)" ng-show="excerpt && username && depth!==-1 && paragraph !== '<p><br/></p>' && paragraph !== '<p></p>' && paragraph !== '<br/>' && paragraph.indexOf('<p><div db-opengraph')<0" class="glyphicon glyphicon-comment comment-glyph"></span>
+					</div>
+					<div ng-if="paragraph.indexOf('<p><div db-opengraph') > -1">
+						<div db-opengraph site="comment.opengraph" count="paragraph.charAt(45)"></div>
+					</div>
+				</div>
+				<div ng-repeat="video in comment.videos">
+					<iframe src="{{video | trustAsResourceUrl}}" width="400" height="225" frameborder="0"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				</div>
+				
+			</div>
+
+		</div>
+
+		<div ng-show="replyInput || topLevelPost">
+			<div class="panel-footer" ng-hide="comment.collapse || comment.inappropriate===1">
+
+				<h1 class="comment-author" ng-show="!username"><a href="/sign-in">Sign in to reply</a></h1>
+				<h1 class="comment-author" ng-show="state.expired"><a href="/account/tab/payment">Renew your account to reply</a></h1>
+				<div ng-show="!state.expired && username">
+					<div db-comment-input></div>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="comment-container" ng-class="{'comment-container-top-reply': depth===0}" ng-repeat="reply in comment.replies">
+	<div ng-hide="comment.collapse" db-comment state="state" comment="reply" depth="depth + 1" ng-show="state.inputLoaded"></div>
+</div>

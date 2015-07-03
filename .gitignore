@@ -1,0 +1,10 @@
+*.pyc
+env/
+log*.txt
+need_love.txt
+docs.txt
+.DS_Store
+*.swp
+bower_components/
+gulp.js
+node_modules/

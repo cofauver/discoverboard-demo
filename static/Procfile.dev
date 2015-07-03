@@ -1,0 +1,2 @@
+backend: cd ~/mermoose-back; python app.py
+frontend: cd ~/mermoose-front; ruby web.rb

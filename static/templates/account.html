@@ -1,0 +1,128 @@
+<div ng-show="username" class="comment-container comment-container-top">
+	<div class="panel">
+
+
+<div class="tabs center-horizontal" ui-state="profileTab" ui-default="activeTab">
+
+	  <ul class="nav nav-pills" style="display:inline-block;padding-top:10px">
+	    <li ui-class="{'active': profileTab == 1}">
+	      <a ng-click="setTab(1)">Notifications</a>
+	    </li>
+	    <li ui-class="{'active': profileTab == 3}">
+	      <a ng-click="setTab(3)">Payment</a>
+	    </li>
+	    <li ui-class="{'active': profileTab == 4}">
+	      <a ng-click="setTab(4)">Invites</a>
+	   	</li>
+	    <li ui-class="{'active': profileTab == 5}">
+	      <a ng-click="setTab(5)">Password Reset</a>
+	    </li>
+	  </ul>
+
+	  <div class="account-tab" ui-if="profileTab == 1">
+	  	<div db-loading ng-if="!notifications"></div>
+	  	<div class="email-options" db-set-email-frequency account-info="accountInfo" ng-show="notifications"></div>
+        
+      </div>
+
+	  <div class="account-tab" ui-if="profileTab == 3">
+	  	<div db-loading ng-if="!accountInfo"></div>
+
+	  	<div ng-hide="financialInfoStep">
+
+	    	<p ng-show="accountInfo.noSubscription===1 && !state.expired" style="color:red">If you do not add payment info, your access will end on {{accountInfo.nextBilling | date:'longDate'}}</p>
+
+	    	<p ng-show="state.expired" style="color:red">Your trial expired! To renew full access add payment info below.</p>
+
+	    	<button type="button" class="btn btn-primary" ng-show="accountInfo.noSubscription===0" ng-click="toggleSubscription(1)">Cancel subscription</button>
+
+	    	<button type="button" class="btn btn-danger" ng-show="!accountInfo.cardEnding" ng-click="getCreditCardInfo()">Add payment info</button>
+
+	    	<button type="button" class="btn btn-danger" ng-show="accountInfo.canceledSubscription===1" ng-click="toggleSubscription(0)">Reactivate account</button>
+
+	    	<p ng-show="accountInfo.monthlySubscription" style="padding-top:15px"><strong>Subscription cost: </strong>{{(accountInfo.monthlySubscription/100) | currency: $}} per month; billed quarterly at {{(accountInfo.monthlySubscription/100)*3 | currency: $}}</p>
+
+	    	<p ng-show="accountInfo.cardEnding"><strong>Card number: </strong>&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; {{accountInfo.cardEnding}}</p>
+
+	    	<p ng-show="accountInfo.noSubscription===0"><strong>Next Billing Date: </strong>{{accountInfo.nextBilling | date:'longDate'}}</p>
+
+	    	<p ng-show="accountInfo">If you have any questions about your account, call support at <a href="tel:+17272223347">(727) 222-3347</a> or <a href="/contact">use our online form</a>.</p>
+	    </div>
+
+<!-- This could become its own directive -->
+
+		<div class="error-message" ng-show="error && !sendingToStripe">
+			<h4 class="error-title">Error in your submission</h4>
+			<h6>{{errorFromBackend}}</h6>
+		</div>
+
+	  	<div db-loading ng-if="loading"></div>
+
+		<div ng-show="financialInfoStep">
+
+			<h3 style="text-align:left">Secure payment</h3>
+			
+			<p>You'll be charged <strong>{{(accountInfo.monthlySubscription/100.0) | currency}}</strong> per month; billed quarterly at <strong>{{(accountInfo.monthlySubscription/100)*3 | currency: $}}</strong>.</p>
+
+			<p><a target="_blank" href="http://stripe.com"><img src="static/images/solid@2x.png" class="stripe"/></a></p>
+			
+		    <form class="form-group" stripe-form="submitFinancialData" name="cardInfo">
+
+		        <input class="form-control validate" type="text" placeholder="Card number" ng-model="number" name="number" payments-validate="card" payments-format="card" payments-type-model="type" ng-class="cardInfo.number.$card.type" required/>
+
+		        <input class="form-control validate" type="text" placeholder="Expiration (MM / YY)" ng-model="expiry" payments-validate="expiry" payments-format="expiry" required/>
+
+		        <input class="form-control validate" type="text" placeholder="CVC" ng-model="cvc" payments-validate="cvc" payments-format="cvc" payments-type-model="type" required/>
+
+		        <input class="form-control validate" type="text" placeholder="Name on card" required/>
+
+		        <button type="submit" class="btn btn-primary btn-large" ng-disabled="cardInfo.$invalid">Join the community</button>
+
+		    </form>
+
+		    <div class="clearfix"></div>
+		    <div style="padding-top:15px"></div>
+
+		    <p><strong>Our guarantee:</strong> Your price will never change, and you can cancel your membership at any time—even during your free trial.</p>
+			<p>We bill quarterly—if you ever cancel your membership, we'll give you a prorated refund.</p>
+			<p>We'll never sell your data or show you ads. <a href="/faq#privacy" target="_blank">You can read about our comprehensive privacy and credit card protection here.</a></p>
+
+		</div>
+
+<!-- End potential future directive for financial info -->
+
+	 </div>
+
+	  <div class="account-tab" ui-if="profileTab == 4">
+	  	<div db-loading ng-if="!accountInfo"></div>
+  		<p ng-if="accountInfo.invites===0">Well, shoot. Looks like you've invited as many people as you can this month. Check back next month for more invites.</p>
+    	
+    	<div ng-if="accountInfo.invites>0">
+	    	<p> This site is better with friends. You can invite {{accountInfo.invites}} more <span ng-show="accountInfo.invites>1">friends</span><span ng-show="accountInfo.invites === 1">friend</span> right now—and you get a free month for every one of them that joins!
+	    		<span ng-hide="octopusDays===0"> Your invites for this month run out in {{octopusDays}} <span ng-show="octopusDays!==1">days</span><span ng-show="octopusDays === 1">day</span>.
+	    	</p>
+
+	    	<form name="invite">
+		    	<input  class="form-control validate" type="email" ng-model="invitee.email" placeholder="Your buddy's email address" required/>
+		    	<textarea ng-model="inviteMessage" class="form-control" rows="6" style="margin-bottom:10px"></textarea>
+		    	<div class="clear"></div>
+		    	<button ng-disabled="invite.$invalid" type="button" class="btn btn-primary"  ng-click="inviteNewUser(invitee.email, inviteMessage)">Invite</button>
+			</form>
+			
+			<div class="clear" style="padding-top:10px;"></div>
+			<div ng-repeat="invitesSent in numInvitesSent track by $index" ng-show="invitedSuccess" class="alert alert-info" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+				High-fives! We sent your friend an email.
+			</div>
+		</div>
+	  </div>
+	  <div class="account-tab" ui-if="profileTab == 5">
+	  	<div db-password-reset></div>
+	  </div>
+	</div>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+	<p style="margin-top: 10px; margin-left: 10px;">I would like to get a notification email once every 
+		<select ng-model="activityEmailFrequency" ng-change="setActivityEmailFrequency()" ng-options="option.label for option in frequencyOptions">
+		</select>
+		, at most.
+	</p>
+	<p style="margin-left: 10px;">I would like to get top conversations email once every 
+		<select ng-model="topPostsEmailFrequency" ng-change="setTopPostsEmailFrequency()" ng-options="option.label for option in frequencyOptionsSubset">
+		</select> 
+		, at most.
+	</p>
+</div>

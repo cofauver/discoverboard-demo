@@ -1,0 +1,29 @@
+<div class="panel">
+	<div class="panel-body" ng-hide="waitingForLogin">
+
+		<div class="error-message" ng-show="displayErrorMessage">
+			<h4 class="error-title">Error in your submission</h4>
+			<h6>The email or password you entered is incorrect.</h6>
+			<h6>If there seems to be a problem, don't hesitate to call support at <strong>(727) 222 3347</strong>.</h6>
+		</div>
+
+		<h2 ng-if="state.signIn" style="text-align:left">Welcome back.</h2>
+		<h5 ng-hide="state.signIn || displayErrorMessage || state.promptLogin">
+			<span class="glyphicon glyphicon-eye-close"></span>
+			&nbsp;Sign in to view more content
+		</h5>
+
+		<div name="loginForm" class="form-group" ng-keydown="$event.which === 13 && login(emailAddress, password)">
+			<input id="input-username" class="form-control validate" type="email" ng-model="emailAddress" placeholder="email@example.org">
+			<input id="input-password" class="form-control validate" type="password" ng-model="password" placeholder="password" >
+			
+			<button name="loginButton" type="button" class="btn btn-primary" ng-click="login(emailAddress, password)">Get in there</button>
+			
+			<a href="/sign-up"><button type="button" class="btn btn-primary">Need an account?</button></a>
+		</div>
+		<a href="/forgotPassword">Forgot your password?</a>
+
+	</div>
+</div>
+
+<div ng-show="waitingForLogin" db-loading></div>

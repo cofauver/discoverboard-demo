@@ -1,0 +1,78 @@
+<div class="container-message">
+	<div class="panel">
+		<div class="panel-body">
+		
+		<div class="error-message" ng-show="error && !sendingToStripe">
+			<h4 class="error-title">Error in your submission</h4>
+			<h6>{{errorFromBackend}}</h6>
+		</div>
+		<div ng-show="personalInfoStep">
+			<h3 ng-hide="error" style="text-align:left">Let's get started.</h3>
+			<p ng-hide="error">You're 30 seconds away from being a part of our community.</p>
+
+			<form name="userInfo" class="form-group">
+				<input id="input-name" class="form-control" type="Text" ng-model="name" placeholder="Name" required/>
+				<input id="input-email" class="form-control validate" type="email" ng-model="email" placeholder="email@example.org" required/>
+				<input id="input-code" class="form-control validate" type="password" ng-model="password" placeholder="Password" ng-minlength="6" required/>
+				<input id="input-code" class="form-control validate" type="password" ng-model="passwordCopy" placeholder="Password (one more time)" required db-compare-to compare-to="password"/>
+				<button ng-disabled="userInfo.$invalid" type="button" class="btn btn-primary" ng-click="completePersonalInfoStage(name, email, password)" title="start free trial">Start free trial</button>
+		    </form>
+	    </div>
+
+
+<!-- This could become its own directive -->
+
+	<div ng-show="financialInfoStep">
+
+		<h3 style="text-align:left">Secure payment</h3>
+		
+		<p>After a one-month free trial, you'll be charged <strong>${{(monthlyCost/100)}}</strong> per month.</p>
+
+		<p><a target="_blank" href="http://stripe.com"><img src="static/images/solid@2x.png" class="stripe"/></a></p>
+		
+	    <form class="form-group" stripe-form="submitFinancialData" name="cardInfo">
+
+	        <input class="form-control validate" type="text" placeholder="Card number" ng-model="number" name="number" payments-validate="card" payments-format="card" payments-type-model="type" ng-class="cardInfo.number.$card.type" required/>
+
+	        <input class="form-control validate" type="text" placeholder="Expiration (MM / YY)" ng-model="expiry" payments-validate="expiry" payments-format="expiry" required/>
+
+	        <input class="form-control validate" type="text" placeholder="CVC" ng-model="cvc" payments-validate="cvc" payments-format="cvc" payments-type-model="type" required/>
+
+	        <input class="form-control validate" type="text" placeholder="Name on card" required/>
+
+	        <button type="submit" class="btn btn-primary btn-large" ng-disabled="cardInfo.$invalid">Join the community</button>
+
+	    </form>
+
+	    <div class="clearfix"></div>
+	    <div style="padding-top:15px"></div>
+
+	    <p><strong>Our guarantee:</strong> Your price will never change, and you can cancel your membership at any time—even during your free trial.</p>
+		<p>We bill quarterly—if you ever cancel your membership, we'll give you a prorated refund.</p>
+		<p>We'll never sell your data or show you ads.<a href="/faq#privacy" target="_blank">You can read about our comprehensive privacy and credit card protection here.</a></p>
+
+	</div>
+
+<!-- End potential future directive for financial info -->
+
+	<div ng-show="inviteCodeError" class="margin">
+		<div class="error-message">
+			<h6 class="error-title">Looks like there was a problem with your invite code, "{{problemCode}}"</h6>
+		</div>
+		<form class="form-group" name="inviteRetry">
+			<input id="input-code" class="form-control"  ng-model="inviteCodeRetryText" placeholder="invite code (if you have one)"/>
+	        <button class="btn btn-primary btn-large" style="margin-right:4px;" type="button" ng-disabled="inviteRetry.$invalid" ng-click="retryInviteCode(inviteCodeRetryText)">Try again</button>
+	        <button class="btn btn-primary btn-large" type="button" ng-click="skipInviteCode()">Proceed without it</button>
+		</form>
+	</div>
+
+	<div class="margin" ng-show="error || inviteCodeError">
+		<br/>
+		<br/>
+		<p>If there seems to be a problem, don't hesitate to call support at <a href="tel:+17272223347">(727) 222-3347</a>.</p>
+	</div>
+
+</div>
+</div>
+</div>
+	<div db-loading ng-show="spinner"></div>

@@ -1,0 +1,62 @@
+<div class="list-group" ui-turn-off='uiSidebarLeft'>  
+
+  <div ng-show="searching">
+      <a class="list-group-item" style="background-color:#f8fafb;cursor:default">
+        <div style="width: 90%; float:left;">
+          <em>Press enter to search through all posts</em>
+        </div>  
+        <div class="clear"></div>
+      </a>
+  </div>
+
+  <div ng-if="list === 1">
+      <a class="list-group-item" style="background-color:#f8fafb;cursor:default">
+        <div style="width: 90%; float:left;">
+          We crawled the deepest depths, and there wasn't anything with those words in it. Sorry!
+        </div>  
+        <div class="clear"></div>
+      </a>
+  </div>
+
+
+  <div ng-if="list"  ng-repeat="post in list">
+    <a class="list-group-item" style="border-style:none;" ng-href="posts/{{post.id}}">
+      <div ng-if="listName === 'latest'">
+        <div in-view="reportInView($index, $inview)"></div>
+      </div>
+      <table width="100%">
+        <tr>
+          <td width="80px" height="50px" ng-style="{'background-image': 'url({{post.image}})'}" style="background-size:cover;"></td>
+
+          <td width="15px"></td>
+
+          <td>
+            <div style="width: 95%; float:left;font-size:11.5pt;">
+              {{post.summary}} 
+            </div>
+
+            <div style="width: 5%; float:right;">
+              <span class="fa fa-chevron-right pull-right"></span>
+            </div>
+
+            <div class="post-information" style="width: 90%; float:left;">
+              <em>
+                <span ng-if="post.posterName">by {{post.posterName}}</span>
+                <span ng-if="!signedIn">Sign in to see names</span>
+                <span ng-if="post.numChildren>0">&nbsp;|&nbsp;{{post.numChildren}} 
+                  <span ng-show="post.numChildren===1">reply</span>
+                  <span ng-show="post.numChildren>1">replies</span>
+                </span>
+              </em>
+            </div>
+
+          </td>
+
+        </tr>
+      </table>
+      </div>  
+      <div class="clear"></div>
+    </a>
+  </div>
+  <div ng-show="loadHasBeenTriggered" db-loading></div> 
+</div>

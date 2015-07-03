@@ -1,0 +1,16 @@
+<div class="container-message">
+	<div ng-show="promptLogin">
+		<h3>Login to verify</h3>
+		<div db-login state="state"></div>
+	</div>
+	<div ng-hide="promptLogin">
+		<div db-loading ng-hide="success || failure"></div>
+		<h1 ng-hide="success || failure">Verifying...</h1>
+		<h1 ng-show="success"><span class="glyphicon glyphicon-ok"></span> Verified! Redirecting...</h1>
+		<div ng-show="failure">
+            <h1>Something broke.</h1>
+            <h3>That verification code didn't match our records.</h3>
+            <h3>Try again with the link we sent to {{userEmail}}.</h3>
+        </div>
+	</div>
+</div>

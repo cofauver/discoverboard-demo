@@ -1,0 +1,38 @@
+<header class="account-header account-header-home">
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+			<span class="account-avatar account-avatar-home">
+				<img ng-if="profilePicture" class="account-image" ng-src="{{profilePicture}}"/>
+				<img ng-if="!profilePicture" class="account-image" src="static/images/default-user.png"/>
+				<input class="file-input"  type="file" db-file-read fileread="profilePicture"></input>
+			</span>
+		</div>
+
+    	<div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+			<div ng-show="!state.personalInfoEdit">
+				<h1 class="account-name account-header account-header-home pointer" ng-click="togglePersonalInfoEdit()">{{username}}</h1>
+
+				<p class="profile profile-add pointer" ng-show="!accountInfo.location" ng-click="togglePersonalInfoEdit()">add location</p>
+				<p class="profile profile-add pointer" ng-show="accountInfo.location" ng-click="togglePersonalInfoEdit()">{{accountInfo.location}}</p>
+
+				<p class="profile profile-add pointer" ng-show="!accountInfo.bio" ng-click="togglePersonalInfoEdit()">add bio</p>
+				<p class="profile profile-add pointer" ng-show="accountInfo.bio" ng-click="togglePersonalInfoEdit()">{{accountInfo.bio}}</p>
+			</div>
+
+			<div class="alert alert-info" ng-if="state.personalInfoEdit">
+				<button type="button" class="close" ng-click="state.personalInfoEdit = false"><span aria-hidden="true">&times;</span></button>
+				Tell the community a little bit about yourself...and don't forget to upload a picture as well!
+			</div>
+
+			<form name="personalInfo" ng-show="state.personalInfoEdit" class="center-horizontal" style="margin-top:12px;">
+				<div style="display:inline-block; width: 100%">
+			    	<input class="form-control" type="text" ng-model="accountInfo.name" ng-minlength="1" placeholder="What should we call you?" required/>
+			    	<input class="form-control" type="text" ng-model="accountInfo.location" placeholder="Where are you from?"/>
+			    	<input class="form-control" type="text" ng-model="accountInfo.bio" placeholder="Tell us about yourself"/>
+		    		<button ng-disabled="personalInfo.$invalid" type="button" class="btn btn-primary btn-sm" ng-click="addPersonalInfo(accountInfo.bio, accountInfo.location, accountInfo.name)">Save</button>
+		    	</div>
+		   	</form>
+		</div>
+
+</header>

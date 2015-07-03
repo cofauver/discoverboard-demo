@@ -1,0 +1,50 @@
+
+
+<div class="btn-group dropdown">
+  <span ng-click="checkIdNumber(comment.id)" class="comment-action"
+  	class="dropdown-toggle" 
+  	ui-turn-on="flagDropdown"
+  	ng-class="{red: comment.flagged===true}">
+  	{{comment.flagWords}}
+  </span>
+  <div ng-show="comment.id === state.specificId">
+	  <ul
+	    class="dropdown-menu dropdown-menu-right"
+	    role="menu"
+	    ui-show="flagDropdown" 
+	    ui-state="flagDropdown"
+	    ui-turn-off="flagDropdown">
+	    	<li>
+	    		<a href="/about">
+	    			<p style="padding:0px 10px 0px 10px;font-size:10pt;"><em>Which community standard is being violated?</em></p>
+	    		</a>
+	    	</li>
+	    	<li class="divider"></li>
+		    <li>
+		        <a ng-click="flagComment('It does not generate thought-provoking discussion')">
+		        	<p style="padding:0;font-size:10pt;">It does not generate thought-provoking discussion</p>
+		        </a>
+		    </li>
+		    <li>
+		        <a ng-click="flagComment('It is not empathetic')">
+		        	<p style="padding:0;font-size:10pt;">It is not empathetic</p>
+		        </a>
+		    </li>
+		    <li>
+		        <a ng-click="flagComment('It does not cite with evidence')">
+		        	<p style="padding:0;font-size:10pt;">It does not cite with evidence</p>
+		        </a>
+		    </li>
+		    <li>
+		        <a ng-click="flagComment('It disagrees with people, not ideas')">
+		        	<p style="padding:0;font-size:10pt;">It disagrees with people, not ideas</p>
+		        </a>
+		    </li>
+		    <li>
+		        <a ng-click="flagComment('Other')">
+		        	<p style="padding:0;font-size:10pt;">Other</p>
+		        </a>
+		    </li>
+		</ul>
+	</div>
+</div>

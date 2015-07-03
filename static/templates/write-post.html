@@ -1,0 +1,44 @@
+<div class="alert alert-info" ng-if="state.postAlert">
+	<button type="button" class="close" ng-click="state.postAlert = false"><span aria-hidden="true">&times;</span></button>
+	Hey there! You can create a new post by typing in that text box below. Hit submit when you're done and it will show up over there in the sidebar, visible to everyone on the site.
+</div>
+
+<div>
+	<!-- <h3 style="margin:20px auto;width:90%;text-align:left">Start a conversation</h3> -->
+
+	<form role="form" ng-submit="submitComment(workingDraft)">
+		<div class="comment-box">
+			<div class="comment-input">
+				<div class="checkbox btn btn-default" style="float:right;cursor:pointer;margin-top:0px;margin-right:5px" ng-click="userInput.anonymous=!userInput.anonymous">
+					<span ng-hide="userInput.anonymous">Anonymize <span ng-if="!mobile">this post</span></span>
+					<span ng-show="userInput.anonymous" style="color:green">
+						<span class="glyphicon glyphicon-ok"></span>
+						<span>Anonymized</span>
+					</span>
+				</div>
+				<div id="createPost" class="text-angular" text-angular ta-toolbar="[['quote'],['italics'],['insertLink'],['insertImage']]" ng-model="workingDraft.html" placeholder="Start a conversation: add a link, your thoughts, or both."></div>
+				<div class="clear"></div>
+				<input ng-if="!state.expired && !submitted" type="submit" class="btn btn-primary comment-form" value="Submit"/>
+				<input ng-if="state.expired" type="submit" class="btn btn-primary comment-form" value="Renew your account to post" ng-disabled="true"/>
+				<input ng-if="submitted" type="submit" class="btn btn-primary comment-form" value="Success!" ng-disabled="true"/>
+
+				<div class="btn-group" style="float:right;cursor:pointer;margin-top:10px">
+					<div class="btn btn-default" ng-click="draftFunctions.saveDraft(workingDraft)">
+						<span ng-hide="userInput.saved">Save draft</span>
+						<span ng-show="userInput.saved" style="color:green">
+							<span class="glyphicon glyphicon-ok"></span>
+							<span>Saved</span>
+						</span>
+					</div>
+					<div ng-click="showDrafts = !showDrafts" class="btn btn-default">Show drafts</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</form>
+	<div class="clear"></div>
+	<!-- <div style="margin:0px auto;width:90%" db-post-drafts></div> -->
+</div>
+
+<div ng-show="showDrafts" db-post-drafts></div>
