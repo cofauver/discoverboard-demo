@@ -1,1 +1,3 @@
-Portfolio
+Welcome to the code for Cory Fauver's Discoverboard demo. To see the demo live, visit http://dbo-portfolio1.herokuapp.com/ . This repository is available to give a peek into Cory's contributions to Discoverboard's front end. A portion of the back end code has been stripped out because it is still in use in private repositories by Discoverboard Inc. 
+
+The app is served with a simple Flask server. It serves both the front and the backend code so that front end requests to the backend API are quick. The front end code is in the static folder. 
