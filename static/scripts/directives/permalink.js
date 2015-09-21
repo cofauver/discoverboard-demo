@@ -10,7 +10,8 @@ app.directive('dbPermalink',
 			restrict:'EA',
 
 			controller:function($scope){
-				$scope.permalink = '/posts/'+ $scope.comment.id;
+				var domain = 'https://dbo-portfolio1.herokuapp.com';
+				$scope.permalink = domain + '/posts/'+ $scope.comment.id;
 			},
 			templateUrl: '../templates/permalink.html'
 		};

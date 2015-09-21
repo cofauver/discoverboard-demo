@@ -10,10 +10,10 @@ app.directive('dbCommentEdit',
 				editing: '='
 			},
 			controller:function($scope){
-
+				console.log($scope.comment);
 				var user = UserService.getUserId();
 
-				$scope.updatedReplyTextMarkup = $scope.comment.editHtml;
+				$scope.updatedReplyTextMarkup = $scope.comment.edit_html;
 				
 				$scope.updateComment = function(html){
 					var payload = {html: html, posterId: user};
