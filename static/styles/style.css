@@ -650,6 +650,9 @@ textarea {
   text-align: center;
   margin-top: 25px;
 }
+.loading-gif{
+  max-width: 200px;
+}
 .margin{
   margin:10px 10px 10px 10px;
 }

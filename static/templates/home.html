@@ -16,11 +16,11 @@
 		<div ng-if="!state.checklistComplete" db-profile-completion state="state"></div>
 
 		<h3 style="text-align:left;color:white">Notifications and Post History</h3>
-
+		<p ng-show="newsfeed.length===0">Sorry, nothing here yet. Try commenting on some posts.</p>
 	</div>
 
     <div>
-	  	<p ng-show="newsfeed.length===0">Sorry, nothing here yet. Try commenting on some posts.</p>
+
 
 	    <div ng-repeat="card in newsfeed track by $index">
             <div in-view="reportInView($index, $inview)"></div>
